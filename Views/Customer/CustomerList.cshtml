@@ -1,0 +1,78 @@
+﻿@using System.Data
+@model DataTable
+
+<main id="main" class="main">
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="text-center">Customer List</h1>
+                        <a asp-controller="Customer" asp-action="AddCustomert">
+                            <button type="submit" class="btn btn-primary mb-3">Add Customer</button>
+                        </a>
+                        <h3>@TempData["CustomerInsertMsg"]</h3>
+                        <span>@TempData["ErrorMessage"]</span>
+                        <!-- Table with stripped rows -->
+                        <div style="overflow-x: auto;">
+                            <table class="table datatable">
+                                <thead>
+                                    <tr>
+                                        <th>CustomerID</th>
+                                        <th>Customer Name</th>
+                                        <th>Home Address</th>
+                                        <th>Email</th>
+                                        <th>Mobile No</th>
+                                        <th>GST NO</th>
+                                        <th>City Name</th>
+                                        <th>Pincode</th>
+                                        <th>Net Amount</th>
+                                        <th>UserID</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (DataRow dr in Model.Rows)
+                                    {
+                                        <tr>
+                                            <td>@dr["CustomerID"]</td>
+                                            <td>@dr["CustomerName"]</td>
+                                            <td>@dr["HomeAddress"]</td>
+                                            <td>@dr["Email"]</td>
+                                            <td>@dr["MobileNo"]</td>
+                                            <td>@dr["GST_NO"]</td>
+                                            <td>@dr["CityName"]</td>
+                                            <td>@dr["Pincode"]</td>
+                                            <td>@dr["NetAmount"]</td>
+                                            <td>@dr["UserID"]</td>
+                                            <td class="d-flex justify-content-start">
+                                                <a asp-controller="Customer" asp-action="AddCustomer" asp-route-CustomerID="@dr["CustomerID"]">
+                                                    <button type="button" class="btn btn-warning me-2">✎</button>
+                                                </a>
+
+
+                                                <form method="post" asp-controller="Customer" asp-action="DeleteCustomer">
+                                                    <input type="hidden" name="CustomerID" value="@dr["CustomerID"]" />
+                                                    <button onclick="return confirm('Delete?')" type="submit" class="btn btn-danger btn-xs">
+                                                        🗑
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+
+                            <!-- End Table with stripped rows -->
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </section>
+
+</main><!-- End #main -->

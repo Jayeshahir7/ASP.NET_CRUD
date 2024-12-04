@@ -1,0 +1,73 @@
+﻿@using System.Data
+@model DataTable
+<main id="main" class="main">
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        
+                        <h1 class="text-center">Product List</h1>
+                        <a asp-controller="Product" asp-action="AddProduct">
+                            <button type="submit" class="btn btn-primary mb-3">Add Product</button>
+                        </a>
+                       @*  <a asp-controller="Product" asp-action="ProductForm">
+                            <button type="submit" class="btn btn-primary mb-3">2 Product</button>
+                        </a> *@
+                        <h3>@TempData["ProductInsertMsg"]</h3>
+                        <span>@TempData["ErrorMessage"]</span>
+                        <!-- Table with stripped rows -->
+                        <div style="overflow-x: auto;">
+                            <table class="table datatable">
+                                <thead>
+                                    <tr>
+                                        <th>ProductID</th>
+                                        <th>Product Name</th>
+                                        <th>Product Price</th>
+                                        <th>Product Code</th>
+                                        <th>Description</th>
+                                        <th>UserID</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (DataRow dr in Model.Rows)
+                                    {
+                                        <tr>
+
+                                            <td>@dr["ProductID"]</td>
+                                            <td>@dr["ProductName"]</td>
+                                            <td>@dr["ProductPrice"]</td>
+                                            <td>@dr["ProductCode"]</td>
+                                            <td>@dr["Description"]</td>
+                                            <td>@dr["UserID"]</td>
+                                            <td class="d-flex justify-content-start">
+                                                <a asp-controller="Product" asp-action="AddProduct" asp-route-ProductID="@dr["ProductID"]">
+                                                    <button type="button" class="btn btn-warning me-2">✎</button>
+                                                </a>
+
+                                                <form method="post" asp-controller="Product" asp-action="DeleteProduct">
+                                                    <input type="hidden" name="ProductID" value="@dr["ProductID"]" />
+                                                    <button onclick="return confirm('Delete?')" type="submit" class="btn btn-danger btn-xs">
+                                                        🗑
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+
+                            <!-- End Table with stripped rows -->
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </section>
+
+</main><!-- End #main -->

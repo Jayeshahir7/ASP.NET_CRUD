@@ -1,0 +1,81 @@
+﻿@model CustomerModel
+<form id="main" asp-controller="Customer" asp-action="Save">
+    <div class="container">
+        <h1 class="text-center"> Add Customer </h1>
+
+        @if (Model.CustomerID != null)
+        {
+            <input type="hidden" asp-for="CustomerID" />
+        }
+
+        <div class="form-group">
+            <label><span class="text-danger">*</span>CustomerName:-</label>
+            <input type="text" asp-for="CustomerName" class="form-control" />
+            <span asp-validation-for="CustomerName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label><span class="text-danger">*</span>HomeAddress:-</label>
+            <input type="text" asp-for="HomeAddress" class="form-control" />
+            <span asp-validation-for="HomeAddress" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label><span class="text-danger">*</span>Email:-</label>
+            <input type="email" asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label><span class="text-danger">*</span>MobileNo:-</label>
+            <input type="number" asp-for="MobileNo" class="form-control" />
+            <span asp-validation-for="MobileNo" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label><span class="text-danger">*</span>GSTNO:-</label>
+            <input type="text" asp-for="GST_NO" class="form-control" />
+            <span asp-validation-for="GST_NO" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label><span class="text-danger">*</span>CityName:-</label>
+            <input type="text" asp-for="CityName" class="form-control" />
+            <span asp-validation-for="CityName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label><span class="text-danger">*</span>Pincode:-</label>
+            <input type="number" asp-for="Pincode" class="form-control" />
+            <span asp-validation-for="Pincode" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label><span class="text-danger">*</span>NetAmount:-</label>
+            <input type="number" asp-for="NetAmount" class="form-control" />
+            <span asp-validation-for="NetAmount" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-12">
+            <label><span class="form-label">*</span>User ID:-</label>
+            <input type="number" asp-for="UserID" class="form-control" />
+            <span asp-validation-for="UserID" class="text-danger"></span>
+        </div>
+
+        <div class="col">
+            <button class="btn btn-success mt-5 ml-5 btn-lg">Submit</button>
+            <a class="btn btn-danger mt-5 ml-5 btn-lg " asp-controller="User" asp-action="UserList">Back</a>
+        </div>
+    </div>
+
+    
+
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

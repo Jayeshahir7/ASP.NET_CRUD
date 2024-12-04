@@ -1,0 +1,73 @@
+﻿@using System.Data
+@model DataTable
+
+<main id="main" class="main">
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="text-center">Order List</h1>
+                        <a asp-controller="Order" asp-action="AddOrder">
+                            <button type="submit" class="btn btn-primary mb-3">Add Order</button>
+                        </a>
+                        <h3>@TempData["OrderInsertMsg"]</h3>
+                        <h3>@TempData["ErrorMessage"]</h3>
+                        <!-- Table with stripped rows -->
+                        <div style="overflow-x: auto;">
+                            <table class="table datatable">
+                                <thead>
+                                    <tr>
+                                        <th>OrderID</th>
+                                        <th>Order Number</th>
+                                        <th>Order Date</th>
+                                        <th>CustomerID</th>
+                                        <th>Payment Mode</th>
+                                        <th>Total Amount</th>
+                                        <th>Shipping Address</th>
+                                        <th>UserID</th>
+                                        <th>Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (DataRow dr in Model.Rows)
+                                    {
+                                        <tr>
+                                            <td>@dr["OrderID"]</td>
+                                            <td>@dr["Ordernumber"]</td>
+                                            <td>@dr["OrderDate"]</td>
+                                            <td>@dr["CustomerID"]</td>
+                                            <td>@dr["PaymentMode"]</td>
+                                            <td>@dr["TotalAmount"]</td>
+                                            <td>@dr["ShippingAddress"]</td>
+                                            <td>@dr["UserID"]</td>
+                                            <td class="d-flex justify-content-start">
+                                                <a asp-controller="Order" asp-action="AddOrder" asp-route-OrderID=@dr["OrderID"]>
+                                                    <button type="button" class="btn btn-warning me-2">✎</button>
+                                                </a>
+                                                <form method="post" asp-controller="Order" asp-action="DeleteOrder">
+                                                    <input type="hidden" name="OrderID" value="@dr["OrderID"]" />
+                                                    <button onclick="return confirm('Delete?')" type="submit" class="btn btn-danger btn-xs">
+                                                        🗑
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+
+                            <!-- End Table with stripped rows -->
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </section>
+
+</main><!-- End #main -->

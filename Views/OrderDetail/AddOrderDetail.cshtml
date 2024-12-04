@@ -1,0 +1,64 @@
+﻿@model OrderDetail
+<form id="main" asp-controller="OrderDetail" asp-action="save">
+    <div class="container">
+        <h1 class="text-center"> Add OrderDetail </h1>
+
+        @if (Model.OrderDetailID != null)
+        {
+            <input type="hidden" asp-for="OrderDetailID" />
+        }
+        <div>
+            <label><span class="text-danger">*</span>OrderID </label>
+            <select class="form-control" asp-for="OrderID" asp-items="@(new SelectList(ViewBag.OrderList, "OrderID", "OrderID"))">
+                <option value="">Select Order</option>
+            </select>
+            <span asp-validation-for="OrderID" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label><span class="text-danger">*</span>ProductID </label>
+            <select class="form-control" asp-for="ProductID" asp-items="@(new SelectList(ViewBag.ProductList, "ProductID", "ProductName"))">
+                <option value="">Select Product</option>
+            </select>
+            <span asp-validation-for="ProductID" class="text-danger"></span>
+        </div>
+                
+
+        <div class="form-group">
+            <label><span class="text-danger">*</span>Quantity:-</label>
+            <input type="number" asp-for="Quantity" class="form-control" />
+            <span asp-validation-for="Quantity" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label><span class="text-danger">*</span>Amount:-</label>
+            <input type="number" asp-for="Amount" class="form-control" />
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label><span class="text-danger">*</span>TotalAmount:-</label>
+            <input type="number" asp-for="TotalAmount" class="form-control" />
+            <span asp-validation-for="TotalAmount" class="text-danger"></span>
+        </div>
+
+       
+
+        <div class="col-md-12">
+            <label><span class="form-label">*</span>User ID:-</label>
+            <input type="number" asp-for="UserID" class="form-control" />
+            <span asp-validation-for="UserID" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <button class="btn btn-success mt-5 ml-5 btn-lg">Submit</button>
+            <a class="btn btn-danger mt-5 ml-5 btn-lg " asp-controller="OrderDetail" asp-action="OrderDetailList">Back</a>
+        </div>
+    </div>
+
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

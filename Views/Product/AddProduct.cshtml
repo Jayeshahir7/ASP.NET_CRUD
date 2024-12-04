@@ -1,0 +1,53 @@
+﻿@model ProductModel
+<form id="main" method="post" asp-action="Save" asp-controller="Product">
+    <div class="container">
+        <h1 class="text-center"> Add Product </h1>
+        @if (Model.ProductID != null)
+        {
+            <input type="hidden" asp-for="ProductID" />
+        }
+        <div class="form-group">
+            <label><span class="text-danger">*</span>Product Name:-</label>
+            <input type="text" asp-for="ProductName" class="form-control" />
+            <span asp-validation-for="ProductName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label><span class="text-danger">*</span>ProductPrice:-</label>
+            <input type="number" asp-for="ProductPrice" class="form-control" />
+            <span asp-validation-for="ProductPrice" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label><span class="text-danger">*</span>ProductCode:-</label>
+            <input type="text" asp-for="ProductCode" class="form-control" />
+            <span asp-validation-for="ProductCode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label><span class="text-danger">*</span>Description:-</label>
+            <input type="text" asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-12">
+            <label><span class="form-label">*</span>User ID:-</label>
+           <input type="number" asp-for="UserID" class="form-control" />
+        </div>
+       
+
+        <div class="col">
+            <button class="btn btn-success mt-5 ml-5 btn-lg">Submit</button>
+            <a class="btn btn-danger mt-5 ml-5 btn-lg " asp-controller="Product" asp-action="ProductList">Back</a>
+        </div>
+
+    </div>
+
+
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
